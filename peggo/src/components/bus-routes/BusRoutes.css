@@ -1,0 +1,22 @@
+.bus-routes {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.bus-routes h2 {
+  color: #0056a6;
+  font-size: 1.5rem;
+}
+
+.bus-routes p {
+  color: #1f2933;
+}
+
+.bus-routes ul {
+  padding-left: 20px;
+}
+
+.bus-routes li {
+  margin: 10px 0;
+}
