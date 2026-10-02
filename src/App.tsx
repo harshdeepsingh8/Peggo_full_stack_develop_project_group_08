@@ -17,6 +17,8 @@ function App() {
     'Route 18 - North Main',
   ])
 
+  const [selectedRoute, setSelectedRoute] = useState('No route selected')
+
   return (
     <>
       <header>
@@ -36,6 +38,8 @@ function App() {
               <BusRoutes
                 routes={routes}
                 setRoutes={setRoutes}
+                selectedRoute={selectedRoute}
+                setSelectedRoute={setSelectedRoute}
               />
             }
           />
@@ -46,6 +50,8 @@ function App() {
               <BusRoutes
                 routes={routes}
                 setRoutes={setRoutes}
+                selectedRoute={selectedRoute}
+                setSelectedRoute={setSelectedRoute}
               />
             }
           />
@@ -56,6 +62,8 @@ function App() {
               <FavouriteBusRoutes
                 favouriteRoutes={favouriteRoutes}
                 setFavouriteRoutes={setFavouriteRoutes}
+                selectedRoute={selectedRoute}
+                setSelectedRoute={setSelectedRoute}
               />
             }
           />
