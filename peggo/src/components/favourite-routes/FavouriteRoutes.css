@@ -1,0 +1,26 @@
+.favourite-routes {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d6dde3;
+}
+
+.favourite-routes h2 {
+  color: #0056a6;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.favourite-routes p {
+  color: #1f2933;
+  font-size: 1rem;
+}
+
+.favourite-routes ul {
+  padding-left: 20px;
+}
+
+.favourite-routes li {
+  margin: 10px 0;
+  color: #1f2933;
+}

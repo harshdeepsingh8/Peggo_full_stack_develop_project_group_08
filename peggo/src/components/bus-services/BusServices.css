@@ -1,0 +1,22 @@
+.bus-services {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.bus-services h2 {
+  color: #0056a6;
+  font-size: 1.5rem;
+}
+
+.bus-services p {
+  color: #1f2933;
+}
+
+.bus-services ul {
+  padding-left: 20px;
+}
+
+.bus-services li {
+  margin: 10px 0;
+}
