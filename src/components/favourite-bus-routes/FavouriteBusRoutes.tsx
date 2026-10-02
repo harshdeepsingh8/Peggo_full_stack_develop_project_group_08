@@ -1,25 +1,59 @@
 import { useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-function FavouriteBusRoutes() {
-  const [favouriteRoutes, setFavouriteRoutes] = useState([
-    'Route 11 - Portage',
-    'Route 18 - North Main',
-  ])
+type FavouriteBusRoutesProps = {
+  favouriteRoutes: string[]
+  setFavouriteRoutes: Dispatch<SetStateAction<string[]>>
+}
+
+function FavouriteBusRoutes({
+  favouriteRoutes,
+  setFavouriteRoutes,
+}: FavouriteBusRoutesProps) {
+  const [newRoute, setNewRoute] = useState('')
+
+  function addFavourite(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const route = newRoute.trim()
+
+    if (route === '') {
+      return
+    }
+
+    setFavouriteRoutes([...favouriteRoutes, route])
+    setNewRoute('')
+  }
 
   function removeFavourite(route: string) {
     setFavouriteRoutes(
-      favouriteRoutes.filter((favouriteRoute) => favouriteRoute !== route)
+      favouriteRoutes.filter((favouriteRoute) => favouriteRoute !== route),
     )
   }
 
   return (
     <section className="favourite-bus-routes">
-      <h2>Favourite Bus Routes</h2>
+      <h1>Favourite Bus Routes</h1>
+
+      <form onSubmit={addFavourite}>
+        <label htmlFor="favourite-route">Bus Route</label>
+
+        <input
+          id="favourite-route"
+          type="text"
+          value={newRoute}
+          onChange={(event) => setNewRoute(event.target.value)}
+        />
+
+        <button type="submit">Add Favourite</button>
+      </form>
+
+      <h2>Saved Routes</h2>
 
       <ul>
         {favouriteRoutes.map((route) => (
           <li key={route}>
-            {route}
+            {route}{' '}
             <button type="button" onClick={() => removeFavourite(route)}>
               Remove
             </button>
