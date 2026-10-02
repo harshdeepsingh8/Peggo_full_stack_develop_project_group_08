@@ -12,6 +12,11 @@ function App() {
     'Route 47 - Transcona',
   ])
 
+  const [favouriteRoutes, setFavouriteRoutes] = useState([
+    'Route 11 - Portage',
+    'Route 18 - North Main',
+  ])
+
   return (
     <>
       <header>
@@ -47,7 +52,12 @@ function App() {
 
           <Route
             path="/favourite-routes"
-            element={<FavouriteBusRoutes />}
+            element={
+              <FavouriteBusRoutes
+                favouriteRoutes={favouriteRoutes}
+                setFavouriteRoutes={setFavouriteRoutes}
+              />
+            }
           />
         </Routes>
       </main>
