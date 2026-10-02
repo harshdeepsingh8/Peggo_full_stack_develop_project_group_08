@@ -3,6 +3,7 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import NearbyStops from './components/nearby-stops/NearbyStops'
+import FavouriteBusRoutes from './components/favourite-bus-routes/FavouriteBusRoutes'
 import './App.css'
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       </section>
 
       <NearbyStops />
+      <FavouriteBusRoutes />
 
       <div className="ticks"></div>
 
