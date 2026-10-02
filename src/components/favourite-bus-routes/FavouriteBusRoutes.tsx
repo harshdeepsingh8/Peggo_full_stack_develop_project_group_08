@@ -4,11 +4,15 @@ import type { Dispatch, FormEvent, SetStateAction } from 'react'
 type FavouriteBusRoutesProps = {
   favouriteRoutes: string[]
   setFavouriteRoutes: Dispatch<SetStateAction<string[]>>
+  selectedRoute: string
+  setSelectedRoute: Dispatch<SetStateAction<string>>
 }
 
 function FavouriteBusRoutes({
   favouriteRoutes,
   setFavouriteRoutes,
+  selectedRoute,
+  setSelectedRoute,
 }: FavouriteBusRoutesProps) {
   const [newRoute, setNewRoute] = useState('')
 
@@ -35,6 +39,8 @@ function FavouriteBusRoutes({
     <section className="favourite-bus-routes">
       <h1>Favourite Bus Routes</h1>
 
+      <p>Selected Route: {selectedRoute}</p>
+
       <form onSubmit={addFavourite}>
         <label htmlFor="favourite-route">Bus Route</label>
 
@@ -54,6 +60,14 @@ function FavouriteBusRoutes({
         {favouriteRoutes.map((route) => (
           <li key={route}>
             {route}{' '}
+
+            <button
+              type="button"
+              onClick={() => setSelectedRoute(route)}
+            >
+              Select
+            </button>{' '}
+
             <button
               type="button"
               onClick={() => removeFavourite(route)}
