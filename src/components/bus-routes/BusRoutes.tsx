@@ -8,10 +8,60 @@ type BusRoutesProps = {
   setSelectedRoute: Dispatch<SetStateAction<string>>
 }
 
-const sampleRoutes = Array.from(
-  { length: 20 },
-  (_, index) => `Sample Route ${index + 1}`,
+const routeGroups = [
+  { name: 'Rapid Transit', routes: ['BLUE'] },
+  { name: 'Frequent Express', routes: ['FX2', 'FX3', 'FX4'] },
+  { name: 'Frequent', routes: ['F5', 'F6', 'F7', 'F8', 'F9'] },
+  {
+    name: 'Direct',
+    routes: [
+      'D10', 'D11', 'D12', 'D13', 'D14',
+      'D15', 'D16', 'D17', 'D18', 'D19',
+    ],
+  },
+  {
+    name: 'Two-digit routes',
+    routes: ['22', '28', '31', '37', '38', '39', '43', '48', '70', '74', '91'],
+  },
+  { name: '200-series', routes: ['220', '223', '224'] },
+  { name: '300-series', routes: ['330', '332', '334', '336'] },
+  { name: '400-series', routes: ['440', '442', '444', '446'] },
+  { name: '500-series', routes: ['551', '552', '556', '557', '558'] },
+  {
+    name: '600-series',
+    routes: [
+      '641', '642', '649', '650', '662', '664', '671', '672',
+      '676', '677', '678', '679', '680', '690', '691', '694',
+    ],
+  },
+  {
+    name: '800-series',
+    routes: [
+      '833', '881', '883', '884', '885',
+      '886', '887', '888', '889', '895',
+    ],
+  },
+]
+
+const allRoutes = routeGroups.flatMap((group) =>
+  group.routes.map((route) => `Route ${route}`),
 )
+
+function RouteOptions() {
+  return (
+    <>
+      {routeGroups.map((group) => (
+        <optgroup key={group.name} label={group.name}>
+          {group.routes.map((route) => (
+            <option key={route} value={`Route ${route}`}>
+              Route {route}
+            </option>
+          ))}
+        </optgroup>
+      ))}
+    </>
+  )
+}
 
 function BusRoutes({
   routes,
@@ -22,28 +72,37 @@ function BusRoutes({
   const [newRoute, setNewRoute] = useState('')
   const [message, setMessage] = useState('')
 
-  const dropdownRoutes = [...new Set([...routes, ...sampleRoutes])]
-  const dropdownValue = dropdownRoutes.includes(selectedRoute)
-    ? selectedRoute
-    : ''
+  // Keep existing saved routes selectable too.
+  const extraRoutes = [...new Set(routes)].filter(
+    (route) => !allRoutes.includes(route),
+  )
+
+  const dropdownValue =
+    allRoutes.includes(selectedRoute) || extraRoutes.includes(selectedRoute)
+      ? selectedRoute
+      : ''
 
   function addRoute(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const route = newRoute.trim()
+    if (!allRoutes.includes(newRoute)) {
+      setMessage('Please choose a route to add.')
+      return
+    }
 
-    if (!route) {
-      setMessage('Please enter a route.')
+    if (routes.includes(newRoute)) {
+      setMessage(`${newRoute} is already in your available routes.`)
       return
     }
 
     setRoutes((currentRoutes) =>
-      currentRoutes.includes(route)
+      currentRoutes.includes(newRoute)
         ? currentRoutes
-        : [...currentRoutes, route],
+        : [...currentRoutes, newRoute],
     )
+
+    setMessage(`${newRoute} added to your available routes.`)
     setNewRoute('')
-    setMessage(`${route} is in your available routes.`)
   }
 
   function removeRoute(route: string) {
@@ -76,27 +135,21 @@ function BusRoutes({
         >
           <option value="">Select a route</option>
 
-          <optgroup label="Your available routes">
-            {[...new Set(routes)].map((route) => (
-              <option key={route} value={route}>
-                {route}
-              </option>
-            ))}
-          </optgroup>
+          <RouteOptions />
 
-          <optgroup label="Sample routes">
-            {sampleRoutes
-              .filter((route) => !routes.includes(route))
-              .map((route) => (
+          {extraRoutes.length > 0 && (
+            <optgroup label="Previously saved routes">
+              {extraRoutes.map((route) => (
                 <option key={route} value={route}>
                   {route}
                 </option>
               ))}
-          </optgroup>
+            </optgroup>
+          )}
         </select>
 
         <p className="helper-text">
-          Sample routes are for the project demonstration.
+          Routes are grouped by service type and route number.
         </p>
       </div>
 
@@ -105,15 +158,16 @@ function BusRoutes({
       </p>
 
       <form onSubmit={addRoute}>
-        <label htmlFor="bus-route">Add a bus route</label>
+        <label htmlFor="add-route-dropdown">Add a bus route</label>
 
-        <input
-          id="bus-route"
-          type="text"
-          placeholder="Enter a route number or name"
+        <select
+          id="add-route-dropdown"
           value={newRoute}
           onChange={(event) => setNewRoute(event.target.value)}
-        />
+        >
+          <option value="">Choose a route to add</option>
+          <RouteOptions />
+        </select>
 
         <button type="submit">Add Route</button>
       </form>
@@ -125,10 +179,10 @@ function BusRoutes({
       <h2>Available Routes</h2>
 
       {routes.length === 0 ? (
-        <p>No routes yet. Add one above.</p>
+        <p>No routes yet. Choose one above and click Add Route.</p>
       ) : (
         <ul>
-          {routes.map((route) => (
+          {[...new Set(routes)].map((route) => (
             <li key={route}>
               <span>{route}</span>
 
