@@ -60,10 +60,11 @@ function App() {
             path="/favourite-routes"
             element={
               <FavouriteBusRoutes
-                favouriteRoutes={favouriteRoutes}
-                setFavouriteRoutes={setFavouriteRoutes}
-                selectedRoute={selectedRoute}
-                setSelectedRoute={setSelectedRoute}
+              routes={routes}
+              favouriteRoutes={favouriteRoutes}
+              setFavouriteRoutes={setFavouriteRoutes}
+              selectedRoute={selectedRoute}
+              setSelectedRoute={setSelectedRoute}
               />
             }
           />
