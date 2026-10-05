@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 
 type FavouriteBusRoutesProps = {
+  routes: string[]
   favouriteRoutes: string[]
   setFavouriteRoutes: Dispatch<SetStateAction<string[]>>
   selectedRoute: string
@@ -9,6 +10,7 @@ type FavouriteBusRoutesProps = {
 }
 
 function FavouriteBusRoutes({
+  routes,
   favouriteRoutes,
   setFavouriteRoutes,
   selectedRoute,
@@ -19,13 +21,15 @@ function FavouriteBusRoutes({
   function addFavourite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const route = newRoute.trim()
-
-    if (route === '') {
+    if (newRoute === '') {
       return
     }
 
-    setFavouriteRoutes([...favouriteRoutes, route])
+    if (favouriteRoutes.includes(newRoute)) {
+      return
+    }
+
+    setFavouriteRoutes([...favouriteRoutes, newRoute])
     setNewRoute('')
   }
 
@@ -44,12 +48,19 @@ function FavouriteBusRoutes({
       <form onSubmit={addFavourite}>
         <label htmlFor="favourite-route">Bus Route</label>
 
-        <input
+        <select
           id="favourite-route"
-          type="text"
           value={newRoute}
           onChange={(event) => setNewRoute(event.target.value)}
-        />
+        >
+          <option value="">Select a route</option>
+
+          {routes.map((route) => (
+            <option key={route} value={route}>
+              {route}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Add Favourite</button>
       </form>
