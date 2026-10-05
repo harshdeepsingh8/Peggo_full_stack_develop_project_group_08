@@ -6,11 +6,28 @@ import './App.css'
 
 function App() {
   const [routes, setRoutes] = useState([
-    'Route 11 - Portage',
-    'Route 18 - North Main',
-    'Route 21 - Portage Express',
-    'Route 47 - Transcona',
-  ])
+  'Route BLUE - St Norbert/Uom',
+  'Route FX2 - St Vital/Garden City',
+  'Route F5 - St Vital/Garden City',
+  'Route D10 - Transcona/Southdale',
+  'Route D11 - Portage/Main',
+  'Route D12 - Forks/Airport',
+  'Route D13 - St Boniface/West Kildonan',
+  'Route D14 - St Boniface/West Kildonan',
+  'Route D15 - St Boniface/West Kildonan',
+  'Route D16 - Polo Park/Downtown',
+  'Route D17 - Downtown/Zoo',
+  'Route D18 - Downtown/RRC',
+  'Route D19 - Downtown/West Kildonan',
+  'Route 22 - Downtown/Transcona',
+  'Route 28 - Downtown/St Vital',
+  'Route 31 - Downtown/St Boniface',
+  'Route 37 - Downtown/St James',
+  'Route 38 - Downtown/St James',
+  'Route 39 - Downtown/St James',
+  'Route 43 - Downtown/St James',
+  'Route 48 - Downtown/St James',
+])
 
   const [favouriteRoutes, setFavouriteRoutes] = useState([
     'Route 11 - Portage',
