@@ -1,38 +1,46 @@
+
 import { useState } from 'react'
-import type { Dispatch, FormEvent, SetStateAction } from 'react'
+import type { FormEvent } from 'react'
+import { useFavouriteRoutes } from '../../hooks/useFavouriteRoutes'
 
 type FavouriteBusRoutesProps = {
-  favouriteRoutes: string[]
-  setFavouriteRoutes: Dispatch<SetStateAction<string[]>>
+  routes: string[]
   selectedRoute: string
-  setSelectedRoute: Dispatch<SetStateAction<string>>
+  setSelectedRoute: (route: string) => void
 }
 
+/*
+  Sprint 3 - Student 2: Lovedeep Singh
+
+  Component: Displays favourite bus routes and user actions.
+  Hook: useFavouriteRoutes manages UI state and calls the service.
+  Service: Validates route names and handles business rules.
+  Repository: Stores and manages favourite route test data.
+*/
+
 function FavouriteBusRoutes({
-  favouriteRoutes,
-  setFavouriteRoutes,
+  routes,
   selectedRoute,
   setSelectedRoute,
 }: FavouriteBusRoutesProps) {
   const [newRoute, setNewRoute] = useState('')
 
-  function addFavourite(event: FormEvent<HTMLFormElement>) {
+  const {
+    favouriteRoutes,
+    errorMessage,
+    addFavourite,
+    removeFavourite,
+  } = useFavouriteRoutes()
+
+  function handleAddFavourite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const route = newRoute.trim()
-
-    if (route === '') {
+    if (newRoute === '') {
       return
     }
 
-    setFavouriteRoutes([...favouriteRoutes, route])
+    addFavourite(newRoute)
     setNewRoute('')
-  }
-
-  function removeFavourite(route: string) {
-    setFavouriteRoutes(
-      favouriteRoutes.filter((favouriteRoute) => favouriteRoute !== route),
-    )
   }
 
   return (
@@ -41,36 +49,45 @@ function FavouriteBusRoutes({
 
       <p>Selected Route: {selectedRoute}</p>
 
-      <form onSubmit={addFavourite}>
+      <form onSubmit={handleAddFavourite}>
         <label htmlFor="favourite-route">Bus Route</label>
 
-        <input
+        <select
           id="favourite-route"
-          type="text"
           value={newRoute}
           onChange={(event) => setNewRoute(event.target.value)}
-        />
+        >
+          <option value="">Select a route</option>
+
+          {routes.map((route) => (
+            <option key={route} value={route}>
+              {route}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Add Favourite</button>
       </form>
+
+      <p role="status">{errorMessage}</p>
 
       <h2>Saved Routes</h2>
 
       <ul>
         {favouriteRoutes.map((route) => (
-          <li key={route}>
-            {route}{' '}
+          <li key={route.id}>
+            {route.routeName}{' '}
 
             <button
               type="button"
-              onClick={() => setSelectedRoute(route)}
+              onClick={() => setSelectedRoute(route.routeName)}
             >
               Select
             </button>{' '}
 
             <button
               type="button"
-              onClick={() => removeFavourite(route)}
+              onClick={() => removeFavourite(route.id)}
             >
               Remove
             </button>
