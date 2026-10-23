@@ -7,6 +7,12 @@ export const favouriteRouteService = {
     return favouriteRouteRepo.getAll()
   },
 
+  isFavourite(routeName: string): boolean {
+    return favouriteRouteRepo.getAll().some(
+      (route) => route.routeName === routeName.trim()
+    )
+  },
+
   add(routeName: string): boolean {
     const name = routeName.trim()
 

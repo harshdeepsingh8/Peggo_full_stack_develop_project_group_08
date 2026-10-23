@@ -6,11 +6,11 @@ Feature: Favourite Bus Routes
 
 ## Custom Hook = useFavouriteRoutes
 
-I created this hook to manage the favourite routes and error messages. It also helps to add, remove, update, and refresh routes. I used a hook because our notes say hooks are for UI state and reusable logic. I used it in FavouriteBusRoutes.tsx. It returns favouriteRoutes, errorMessage, addFavourite, removeFavourite, updateFavourite, and refreshRoutes to manage the page.
+I created this hook to manage the favourite routes and error messages. It also helps to add, remove, update, and refresh routes. I used a hook because our notes say hooks are for UI state and reusable logic. I used it in FavouriteBusRoutes.tsx and FavouriteRoutesList.tsx. It returns favouriteRoutes, errorMessage, addFavourite, removeFavourite, updateFavourite, and refreshRoutes to manage the page. Both components use the same favourite routes data.
 
 ## Service = favouriteRouteService
 
-I created this service to check if a route name is empty or already saved. It also handles adding, removing, and updating routes through the repository. I used a service because our notes say business logic belongs in the services. It is called by useFavouriteRoutes.ts.
+I created this service to check if a route name is empty or already saved. It also handles adding, removing, and updating routes through the repository. I used a service because our notes say business logic belongs in the services. It is called by useFavouriteRoutes.ts and FavouriteRoutesList.tsx. The list component uses isFavourite to check saved routes.
 
 ## Repository = favouriteRouteRepo
 
@@ -24,6 +24,10 @@ I created FavouriteRoute.ts with an ID and route name. I also added 10 sample ro
 
 I updated this component to show the saved routes and allow users to add, select, and remove favourites. I kept the page display in the component and moved the other logic into the hook, service, and repository. This component is used in App.tsx.
 
+## FavouriteRoutesList Component
+
+I created this component to display the saved favourite routes and allow users to select and remove them. I used the same useFavouriteRoutes hook and favouriteRouteService to reuse the existing logic. This component is used in FavouriteBusRoutes.tsx.
+
 ## How It Works
 
-When a user adds a favourite route, the component calls the hook, the hook calls the service, and the service uses the repository to save the route.
+When a user adds a favourite route, the component calls the hook, the hook calls the service, and the service uses the repository to save the route. When a user removes a route, the same architecture is used to update the saved routes.
