@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
+import RouteDetailsModal from './RouteDetailsModal'
 
 type BusRoutesProps = {
   routes: string[]
@@ -71,8 +72,8 @@ function BusRoutes({
 }: BusRoutesProps) {
   const [newRoute, setNewRoute] = useState('')
   const [message, setMessage] = useState('')
+  const [popupRoute, setPopupRoute] = useState<string | null>(null)
 
-  // Keep existing saved routes selectable too.
   const extraRoutes = [...new Set(routes)].filter(
     (route) => !allRoutes.includes(route),
   )
@@ -81,6 +82,11 @@ function BusRoutes({
     allRoutes.includes(selectedRoute) || extraRoutes.includes(selectedRoute)
       ? selectedRoute
       : ''
+
+  function openRouteDetails(route: string) {
+    setSelectedRoute(route)
+    setPopupRoute(route)
+  }
 
   function addRoute(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -114,6 +120,10 @@ function BusRoutes({
       setSelectedRoute('No route selected')
     }
 
+    if (popupRoute === route) {
+      setPopupRoute(null)
+    }
+
     setMessage(`${route} removed.`)
   }
 
@@ -129,12 +139,18 @@ function BusRoutes({
         <select
           id="route-dropdown"
           value={dropdownValue}
-          onChange={(event) =>
-            setSelectedRoute(event.target.value || 'No route selected')
-          }
+          onChange={(event) => {
+            const route = event.target.value
+
+            if (route) {
+              openRouteDetails(route)
+            } else {
+              setSelectedRoute('No route selected')
+              setPopupRoute(null)
+            }
+          }}
         >
           <option value="">Select a route</option>
-
           <RouteOptions />
 
           {extraRoutes.length > 0 && (
@@ -184,12 +200,18 @@ function BusRoutes({
         <ul>
           {[...new Set(routes)].map((route) => (
             <li key={route}>
-              <span>{route}</span>
+              <button
+                type="button"
+                className="route-name-button"
+                onClick={() => openRouteDetails(route)}
+              >
+                {route}
+              </button>
 
               <div className="route-actions">
                 <button
                   type="button"
-                  onClick={() => setSelectedRoute(route)}
+                  onClick={() => openRouteDetails(route)}
                 >
                   Select
                 </button>
@@ -205,6 +227,14 @@ function BusRoutes({
             </li>
           ))}
         </ul>
+      )}
+
+      {popupRoute !== null && (
+        <RouteDetailsModal
+          key={popupRoute}
+          routeName={popupRoute}
+          onClose={() => setPopupRoute(null)}
+        />
       )}
     </section>
   )
