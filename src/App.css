@@ -213,3 +213,143 @@ footer p {
     width: 100%;
   }
 }
+
+main .route-name-button {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 0;
+  background: transparent;
+  color: #185d95;
+  text-align: left;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+main .route-name-button:hover {
+  background: transparent;
+  color: #123458;
+  text-decoration: underline;
+}
+
+.route-modal {
+  box-sizing: border-box;
+  width: min(520px, calc(100% - 32px));
+  max-height: 85vh;
+  margin: auto;
+  padding: 28px;
+  overflow-y: auto;
+  border: 1px solid #dce5ef;
+  border-radius: 22px;
+  background: white;
+  color: #172b46;
+  font-family: inherit;
+  box-shadow: 0 24px 80px #00000040;
+}
+
+.route-modal::backdrop {
+  background: #0b1d36aa;
+}
+
+.route-modal-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.route-modal-heading h2 {
+  margin: 0;
+  color: #123458;
+  font-size: 26px;
+}
+
+.route-modal-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: #edf2f7;
+  color: #123458;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.route-modal-name {
+  margin: 18px 0 12px;
+  font-size: 18px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.route-modal-note {
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff5db;
+  color: #725514;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.route-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.route-detail-grid > div {
+  padding: 14px;
+  border: 1px solid #dce5ef;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.route-detail-grid dt {
+  margin-bottom: 7px;
+  color: #53657b;
+  font-size: 13px;
+}
+
+.route-detail-grid dd {
+  margin: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.route-modal-done {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #185d95;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.route-modal-done:hover {
+  background: #124674;
+}
+
+.route-modal button:focus-visible,
+main .route-name-button:focus-visible {
+  outline: 3px solid #168263;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .route-modal {
+    padding: 20px;
+  }
+
+  .route-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

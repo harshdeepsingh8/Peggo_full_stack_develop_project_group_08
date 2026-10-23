@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useFavouriteRoutes } from '../../hooks/useFavouriteRoutes'
+import RouteDetailsModal from '../bus-routes/RouteDetailsModal'
 
 type FavouriteBusRoutesProps = {
   routes: string[]
@@ -9,14 +10,16 @@ type FavouriteBusRoutesProps = {
   setSelectedRoute: (route: string) => void
 }
 
-/*
-  Sprint 3 - Student 2: Lovedeep Singh
-
-  Component: Displays favourite bus routes and user actions.
-  Hook: useFavouriteRoutes manages UI state and calls the service.
-  Service: Validates route names and handles business rules.
-  Repository: Stores and manages favourite route test data.
-*/
+/**
+ * Sprint 3 - Student 2: Lovedeep Singh
+ *
+ * Component: Displays favourite routes and user actions.
+ * Hook: useFavouriteRoutes manages UI state and calls the service.
+ * Service: Validates route names and handles business rules.
+ * Repository: Stores and manages favourite route test data.
+ *
+ * RouteDetailsModal is reused from the Bus Routes feature.
+ */
 
 function FavouriteBusRoutes({
   routes,
@@ -24,6 +27,7 @@ function FavouriteBusRoutes({
   setSelectedRoute,
 }: FavouriteBusRoutesProps) {
   const [newRoute, setNewRoute] = useState('')
+  const [popupRoute, setPopupRoute] = useState<string | null>(null)
 
   const {
     favouriteRoutes,
@@ -41,6 +45,11 @@ function FavouriteBusRoutes({
 
     addFavourite(newRoute)
     setNewRoute('')
+  }
+
+  function openRouteDetails(routeName: string) {
+    setSelectedRoute(routeName)
+    setPopupRoute(routeName)
   }
 
   return (
@@ -76,24 +85,44 @@ function FavouriteBusRoutes({
       <ul>
         {favouriteRoutes.map((route) => (
           <li key={route.id}>
-            {route.routeName}{' '}
+            <button
+              type="button"
+              className="route-name-button"
+              onClick={() => openRouteDetails(route.routeName)}
+            >
+              {route.routeName}
+            </button>{' '}
 
             <button
               type="button"
-              onClick={() => setSelectedRoute(route.routeName)}
+              onClick={() => openRouteDetails(route.routeName)}
             >
               Select
             </button>{' '}
 
             <button
               type="button"
-              onClick={() => removeFavourite(route.id)}
+              onClick={() => {
+                removeFavourite(route.id)
+
+                if (popupRoute === route.routeName) {
+                  setPopupRoute(null)
+                }
+              }}
             >
               Remove
             </button>
           </li>
         ))}
       </ul>
+
+      {popupRoute !== null && (
+        <RouteDetailsModal
+          key={popupRoute}
+          routeName={popupRoute}
+          onClose={() => setPopupRoute(null)}
+        />
+      )}
     </section>
   )
 }
