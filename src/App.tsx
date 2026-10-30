@@ -33,8 +33,26 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>PeGGo</h1>
+      <header className="halloween-header">
+  <h1 className="halloween-logo">
+    <span aria-hidden="true"></span>
+    <span className="halloween-wordmark">PeGGo</span>
+    <span className="halloween-ghost" aria-hidden="true">👻</span>
+  </h1>
+
+  <div className="halloween-extras">
+    <span className="halloween-candy" aria-hidden="true">🍬</span>
+    <span className="halloween-treat-label">Trick or Transit!</span>
+    <span aria-hidden="true">🍭</span>
+    <span className="halloween-little-ghost" aria-hidden="true">👻</span>
+  </div>
+
+<span className="halloween-web halloween-web-left" aria-hidden="true">
+  🕸️
+</span>
+<span className="halloween-web halloween-web-right" aria-hidden="true">
+  🕸️
+</span>
 
         <nav>
           <Link to="/bus-routes">Bus Routes</Link>{' '}

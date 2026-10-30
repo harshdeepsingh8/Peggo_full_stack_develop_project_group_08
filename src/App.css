@@ -353,3 +353,145 @@ main .route-name-button:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* Temporary Halloween header theme */
+header.halloween-header {
+  background:
+    radial-gradient(
+      ellipse at top right,
+      #7934a650,
+      transparent 60%
+    ),
+    linear-gradient(120deg, #171329, #302047);
+  border-bottom: 3px solid #ff963f;
+}
+
+header.halloween-header .halloween-logo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.halloween-wordmark {
+  color: #ffb35c;
+  text-shadow:
+    0 0 14px #ff8a3540,
+    0 2px 0 #100b1d;
+}
+
+.halloween-ghost {
+  display: inline-block;
+  font-size: 28px;
+  animation: peggo-ghost-float 3s ease-in-out infinite;
+}
+
+@keyframes peggo-ghost-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halloween-ghost {
+    animation: none;
+  }
+}
+
+/* Extra Halloween decorations beside the logo */
+header.halloween-header {
+  position: relative;
+  isolation: isolate;
+}
+
+.halloween-brand-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-bottom: 18px;
+}
+
+header.halloween-header .halloween-brand-row h1 {
+  margin: 0;
+}
+
+.halloween-extras {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 28px;
+}
+
+.halloween-treat-label {
+  padding: 8px 16px;
+  border: 1px dashed #ffb35c;
+  border-radius: 24px;
+  background: #ff963f12;
+  color: #ffd39d;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.halloween-candy {
+  display: inline-block;
+  transform: rotate(-18deg);
+}
+
+.halloween-little-ghost {
+  display: inline-block;
+  transform: rotate(12deg);
+}
+
+.halloween-web {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  font-size: 72px;
+  line-height: 1;
+  opacity: 0.3;
+  pointer-events: none;
+  user-select: none;
+}
+
+.halloween-web-left {
+  left: 0;
+  transform: rotate(-20deg);
+}
+
+.halloween-web-right {
+  right: 0;
+  transform: rotate(20deg);
+}
+
+header.halloween-header nav {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .halloween-brand-row {
+    gap: 12px;
+  }
+
+  .halloween-extras {
+    gap: 10px;
+    font-size: 23px;
+  }
+
+  .halloween-treat-label {
+    font-size: 12px;
+  }
+
+  .halloween-web {
+    font-size: 52px;
+  }
+}
