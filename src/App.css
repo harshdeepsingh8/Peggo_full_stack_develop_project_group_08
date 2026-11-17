@@ -495,3 +495,333 @@ header.halloween-header nav {
     font-size: 52px;
   }
 }
+
+.app-shell {
+  --theme-start: #123458;
+  --theme-end: #176c83;
+  --theme-tint: #d8f5ed;
+  --theme-page: #eef4fb;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: radial-gradient(
+    ellipse at top left,
+    var(--theme-tint),
+    var(--theme-page) 65%
+  );
+}
+
+.app-shell[data-theme="spiderman"] {
+  --theme-start: #941c31;
+  --theme-end: #163c80;
+  --theme-tint: #fce5e9;
+  --theme-page: #edf2ff;
+}
+
+.app-shell[data-theme="doomsday"] {
+  --theme-start: #202530;
+  --theme-end: #583683;
+  --theme-tint: #ddd3f3;
+  --theme-page: #f0edf6;
+}
+
+.app-shell[data-theme="christmas"] {
+  --theme-start: #145838;
+  --theme-end: #8f2235;
+  --theme-tint: #dceee1;
+  --theme-page: #fff6ee;
+}
+
+.app-shell[data-theme="love"] {
+  --theme-start: #93244e;
+  --theme-end: #a13770;
+  --theme-tint: #f9dce9;
+  --theme-page: #fff3f8;
+}
+
+.app-shell > header {
+  background: linear-gradient(120deg, var(--theme-start), var(--theme-end));
+}
+
+.app-shell .selected-route {
+  background: var(--theme-tint);
+  border-left-color: var(--theme-start);
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.brand-row h1 {
+  margin: 0;
+}
+
+.theme-picker {
+  position: relative;
+}
+
+.theme-picker summary {
+  padding: 10px 14px;
+  border: 1px solid #ffffff70;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.theme-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: grid;
+  gap: 4px;
+  width: 165px;
+  padding: 8px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 24px #0003;
+}
+
+.theme-options button {
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: white;
+  color: #172b46;
+  text-align: left;
+}
+
+.theme-options button:hover,
+.theme-options button[aria-pressed="true"] {
+  background: var(--theme-tint);
+  color: var(--theme-start);
+}
+
+/* Dashboard palettes and decorations for the four special themes */
+
+.app-shell[data-theme="spiderman"] {
+  --theme-start: #a6192e;
+  --theme-end: #123b88;
+  --theme-tint: #fce0e7;
+  --theme-page: #e5edff;
+
+  --dash-surface: #f7f9ff;
+  --dash-panel: #e8efff;
+  --dash-border: #9eb5e8;
+  --dash-heading: #951a31;
+  --dash-text: #243867;
+  --dash-button: #184391;
+  --dash-hover: #122e64;
+  --dash-edge: #bf2038;
+
+  --theme-mark: "🕷";
+  --theme-left: "🕸";
+  --theme-right: "🕸";
+  --theme-pattern:
+    repeating-radial-gradient(
+      circle at 25% 20%,
+      transparent 0 22px,
+      #193d8d18 23px 24px,
+      transparent 25px 34px
+    ),
+    repeating-conic-gradient(
+      from 15deg at 25% 20%,
+      #193d8d12 0deg 1deg,
+      transparent 1deg 30deg
+    );
+}
+
+.app-shell[data-theme="doomsday"] {
+  --theme-start: #101514;
+  --theme-end: #21573a;
+  --theme-tint: #29553d;
+  --theme-page: #121715;
+
+  --dash-surface: #1b2420;
+  --dash-panel: #27352e;
+  --dash-border: #60756a;
+  --dash-heading: #d7f9e4;
+  --dash-text: #d1dbd6;
+  --dash-button: #286146;
+  --dash-hover: #1c4b35;
+  --dash-edge: #a5c1b1;
+
+  --theme-mark: "⟐";
+  --theme-left: "◇";
+  --theme-right: "⟐";
+  --theme-pattern:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 32px,
+      #b9c9c218 33px 34px,
+      transparent 35px 64px
+    ),
+    radial-gradient(ellipse at 85% 15%, #76df9655, transparent 45%);
+}
+
+.app-shell[data-theme="christmas"] {
+  --theme-start: #870f24;
+  --theme-end: #bd2039;
+  --theme-tint: #fbe3e7;
+  --theme-page: #fffafa;
+
+  --dash-surface: #fffdfd;
+  --dash-panel: #fff0f2;
+  --dash-border: #e9abb6;
+  --dash-heading: #861329;
+  --dash-text: #57333a;
+  --dash-button: #a51c35;
+  --dash-hover: #82132a;
+  --dash-edge: #ce2944;
+
+  --theme-mark: "🎅 🎁";
+  --theme-left: "❄";
+  --theme-right: "🦌";
+  --theme-pattern:
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px),
+    radial-gradient(circle, #a51c3522 0 1px, transparent 2px);
+  --theme-pattern-size: 30px 30px, 47px 47px;
+}
+
+.app-shell[data-theme="love"] {
+  --theme-start: #7d163f;
+  --theme-end: #623492;
+  --theme-tint: #f9d5e5;
+  --theme-page: #fff2e0;
+
+  --dash-surface: #fff6eb;
+  --dash-panel: #f8e7f5;
+  --dash-border: #dfa8cc;
+  --dash-heading: #801638;
+  --dash-text: #563345;
+  --dash-button: #6e2e86;
+  --dash-hover: #57226c;
+  --dash-edge: #b32051;
+
+  --theme-mark: "♡ ♥";
+  --theme-left: "♡";
+  --theme-right: "♥";
+  --theme-pattern:
+    radial-gradient(ellipse at 15% 25%, #e84b8a30, transparent 38%),
+    radial-gradient(ellipse at 85% 40%, #8a43bf30, transparent 45%);
+}
+
+/* These rules apply when one of the special themes is selected. */
+.app-shell[data-theme]:not([data-theme="default"]) {
+  position: relative;
+  isolation: isolate;
+  background:
+    var(--theme-pattern),
+    radial-gradient(ellipse at top left, var(--theme-tint), var(--theme-page) 70%);
+  background-size: var(--theme-pattern-size, auto);
+}
+
+.app-shell[data-theme]:not([data-theme="default"])::before,
+.app-shell[data-theme]:not([data-theme="default"])::after {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  color: var(--dash-edge);
+  font-size: clamp(64px, 13vw, 190px);
+  line-height: 1;
+  opacity: 0.2;
+}
+
+.app-shell[data-theme]:not([data-theme="default"])::before {
+  content: var(--theme-left) / "";
+  top: 12rem;
+  left: 0;
+  transform: rotate(-12deg);
+}
+
+.app-shell[data-theme]:not([data-theme="default"])::after {
+  content: var(--theme-right) / "";
+  right: 0;
+  bottom: 5rem;
+  transform: rotate(12deg);
+}
+
+.app-shell[data-theme]:not([data-theme="default"])
+  :is(.bus-routes, .favourite-bus-routes) {
+  position: relative;
+  background: var(--dash-surface);
+  border-color: var(--dash-border);
+  border-top: 5px solid var(--dash-edge);
+  color: var(--dash-text);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main h1::after {
+  content: var(--theme-mark) / "";
+  display: inline-block;
+  margin-inline-start: 0.4em;
+  color: var(--dash-edge);
+  font-size: 0.65em;
+  vertical-align: 0.12em;
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main :is(h1, h2) {
+  color: var(--dash-heading);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main p {
+  color: var(--dash-text);
+}
+
+.app-shell[data-theme]:not([data-theme="default"])
+  main :is(.route-picker, .section-tag, .selected-route, form, li) {
+  background: var(--dash-panel);
+  border-color: var(--dash-border);
+  color: var(--dash-text);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main .selected-route {
+  border-left-color: var(--dash-edge);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main :is(select, input) {
+  background: var(--dash-surface);
+  border-color: var(--dash-border);
+  color: var(--dash-text);
+}
+
+.app-shell[data-theme]:not([data-theme="default"])
+  main button:not(.remove-button, .route-name-button, .route-modal-close) {
+  background: var(--dash-button);
+  color: white;
+}
+
+.app-shell[data-theme]:not([data-theme="default"])
+  main button:not(.remove-button, .route-name-button, .route-modal-close):hover {
+  background: var(--dash-hover);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) main .route-name-button,
+.app-shell[data-theme]:not([data-theme="default"]) footer {
+  color: var(--dash-text);
+}
+
+.app-shell[data-theme="doomsday"] main :is(select, input) {
+  color-scheme: dark;
+}
+
+.app-shell[data-theme="doomsday"]
+  :is(.bus-routes, .favourite-bus-routes) {
+  box-shadow: 0 0 36px #65d98c26;
+}
+
+/* Keep the side decorations compact on phones. */
+@media (max-width: 600px) {
+  .app-shell[data-theme]:not([data-theme="default"])::before,
+  .app-shell[data-theme]:not([data-theme="default"])::after {
+    font-size: 64px;
+  }
+
+  .app-shell[data-theme]:not([data-theme="default"]) main h1::after {
+    font-size: 0.5em;
+  }
+}
