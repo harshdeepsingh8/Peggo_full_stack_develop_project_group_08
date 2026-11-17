@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import BusRoutes from './components/bus-routes/BusRoutes'
@@ -28,12 +29,6 @@ function App() {
   'Route 43 - Downtown/St James',
   'Route 48 - Downtown/St James',
 ])
-
-  const [favouriteRoutes, setFavouriteRoutes] = useState([
-    'Route 11 - Portage',
-    'Route 18 - North Main',
-  ])
-
   const [selectedRoute, setSelectedRoute] = useState('No route selected')
 
   return (
@@ -77,11 +72,9 @@ function App() {
             path="/favourite-routes"
             element={
               <FavouriteBusRoutes
-              routes={routes}
-              favouriteRoutes={favouriteRoutes}
-              setFavouriteRoutes={setFavouriteRoutes}
-              selectedRoute={selectedRoute}
-              setSelectedRoute={setSelectedRoute}
+                routes={routes}
+                selectedRoute={selectedRoute}
+                setSelectedRoute={setSelectedRoute}
               />
             }
           />

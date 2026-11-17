@@ -1,42 +1,53 @@
-import { useState } from 'react'
-import type { Dispatch, FormEvent, SetStateAction } from 'react'
 
+import { useState } from 'react'
+import type { FormEvent } from 'react'
+import { useFavouriteRoutes } from '../../hooks/useFavouriteRoutes'
+import RouteDetailsModal from '../bus-routes/RouteDetailsModal'
+import FavouriteRoutesList from './FavouriteRoutesList'
 type FavouriteBusRoutesProps = {
   routes: string[]
-  favouriteRoutes: string[]
-  setFavouriteRoutes: Dispatch<SetStateAction<string[]>>
   selectedRoute: string
-  setSelectedRoute: Dispatch<SetStateAction<string>>
+  setSelectedRoute: (route: string) => void
 }
 
+/**
+ * Sprint 3 - Lovedeep Singh
+ *
+ * Component: Displays the Favourite Bus Routes page.
+ * Hook: useFavouriteRoutes manages presentation state.
+ * Service: Handles favourite route validation and business logic.
+ * Repository: Manages favourite route test data.
+ *
+ * FavouriteRoutesList reuses the same custom hook.
+ * RouteDetailsModal displays the selected route details.
+ */
 function FavouriteBusRoutes({
   routes,
-  favouriteRoutes,
-  setFavouriteRoutes,
   selectedRoute,
   setSelectedRoute,
 }: FavouriteBusRoutesProps) {
   const [newRoute, setNewRoute] = useState('')
+  const [popupRoute, setPopupRoute] = useState<string | null>(null)
 
-  function addFavourite(event: FormEvent<HTMLFormElement>) {
+  const {
+    errorMessage,
+    addFavourite,
+  } = useFavouriteRoutes()
+
+  function handleAddFavourite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (newRoute === '') {
       return
     }
 
-    if (favouriteRoutes.includes(newRoute)) {
-      return
-    }
-
-    setFavouriteRoutes([...favouriteRoutes, newRoute])
+    addFavourite(newRoute)
     setNewRoute('')
   }
 
-  function removeFavourite(route: string) {
-    setFavouriteRoutes(
-      favouriteRoutes.filter((favouriteRoute) => favouriteRoute !== route),
-    )
+  function openRouteDetails(routeName: string) {
+    setSelectedRoute(routeName)
+    setPopupRoute(routeName)
   }
 
   return (
@@ -45,7 +56,7 @@ function FavouriteBusRoutes({
 
       <p>Selected Route: {selectedRoute}</p>
 
-      <form onSubmit={addFavourite}>
+      <form onSubmit={handleAddFavourite}>
         <label htmlFor="favourite-route">Bus Route</label>
 
         <select
@@ -65,29 +76,24 @@ function FavouriteBusRoutes({
         <button type="submit">Add Favourite</button>
       </form>
 
-      <h2>Saved Routes</h2>
+      <p role="status">{errorMessage}</p>
 
-      <ul>
-        {favouriteRoutes.map((route) => (
-          <li key={route}>
-            {route}{' '}
+      <FavouriteRoutesList
+        onSelect={openRouteDetails}
+        onRemove={(routeName) => {
+          if (popupRoute === routeName) {
+            setPopupRoute(null)
+          }
+        }}
+      />
 
-            <button
-              type="button"
-              onClick={() => setSelectedRoute(route)}
-            >
-              Select
-            </button>{' '}
-
-            <button
-              type="button"
-              onClick={() => removeFavourite(route)}
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      {popupRoute !== null && (
+        <RouteDetailsModal
+          key={popupRoute}
+          routeName={popupRoute}
+          onClose={() => setPopupRoute(null)}
+        />
+      )}
     </section>
   )
 }
