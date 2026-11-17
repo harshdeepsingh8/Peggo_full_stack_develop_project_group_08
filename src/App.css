@@ -825,3 +825,25 @@ header.halloween-header nav {
     font-size: 0.5em;
   }
 }
+
+.app-shell[data-theme="spiderman"] .transit-basemap {
+  filter: saturate(0.75) contrast(1.1) hue-rotate(12deg);
+}
+
+.app-shell[data-theme="doomsday"] .transit-basemap {
+  filter: grayscale(1) invert(1) sepia(0.35) hue-rotate(80deg) brightness(0.8);
+}
+
+.app-shell[data-theme="christmas"] .transit-basemap {
+  filter: saturate(0.4) brightness(1.08);
+}
+
+.app-shell[data-theme="love"] .transit-basemap {
+  filter: grayscale(0.45) sepia(0.35) hue-rotate(305deg) brightness(1.06);
+}
+
+.app-shell[data-theme]:not([data-theme="default"]) .transit-map-canvas {
+  border: 2px solid var(--dash-border);
+  border-radius: 16px;
+  isolation: isolate;
+}
