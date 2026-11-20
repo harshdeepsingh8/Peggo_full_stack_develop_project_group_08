@@ -847,3 +847,99 @@ header.halloween-header nav {
   border-radius: 16px;
   isolation: isolate;
 }
+
+.app-shell[data-theme]:not([data-theme="default"]) > main {
+  position: relative;
+}
+
+.doomsday-wordmark {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .doomsday-wordmark {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    width: calc((100vw - 100%) / 2 - 8px);
+    color: var(--dash-edge);
+    font-family: Impact, "Arial Black", system-ui, sans-serif;
+    font-weight: 900;
+    pointer-events: none;
+  }
+
+  .doomsday-wordmark-title {
+    font-size: clamp(10px, 1vw, 16px);
+    letter-spacing: 0.16em;
+  }
+
+  .doomsday-wordmark-letters {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    color: var(--dash-heading);
+    font-size: clamp(36px, 3.5vw, 52px);
+    line-height: 1;
+    text-shadow: 2px 3px 0 var(--theme-start), 0 0 18px #76df9640;
+  }
+}
+
+.side-wordmark-word {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.side-wordmark-word + .side-wordmark-word {
+  margin-top: 10px;
+}
+
+.app-shell:is([data-theme="christmas"], [data-theme="spiderman"], [data-theme="love"])
+  .doomsday-wordmark-title {
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: normal;
+}
+
+.app-shell:is([data-theme="christmas"], [data-theme="spiderman"], [data-theme="love"])
+  .doomsday-wordmark-letters {
+  font-size: clamp(26px, 2.7vw, 40px);
+  text-shadow: none;
+}
+
+.app-shell[data-theme="spiderman"] .doomsday-wordmark-title {
+  color: var(--dash-heading);
+  font-variant-emoji: text;
+}
+
+.app-shell[data-theme="spiderman"] .doomsday-wordmark-letters {
+  font-size: clamp(15px, 1.25vw, 19px);
+}
+
+.app-shell[data-theme="spiderman"] .side-wordmark-word {
+  gap: 0;
+}
+
+.side-wordmark-hearts {
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  writing-mode: vertical-rl;
+  font-size: clamp(12px, 1.4vw, 22px);
+  letter-spacing: 0.65em;
+  color: var(--dash-heading);
+  opacity: 0.65;
+}
+
+.side-wordmark-hearts-left {
+  left: 12%;
+  transform: rotate(-5deg);
+}
+
+.side-wordmark-hearts-right {
+  right: 12%;
+  transform: rotate(5deg);
+}
