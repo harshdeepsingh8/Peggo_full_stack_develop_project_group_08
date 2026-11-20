@@ -14,6 +14,14 @@ const themes = [
 
 type Theme = (typeof themes)[number]['id']
 
+const sideWordmarks: Record<Theme, { icon: string; words: string[] }> = {
+  default: { icon: '', words: [] },
+  doomsday: { icon: 'AVENGERS', words: ['DOOMSDAY'] },
+  christmas: { icon: '🎅', words: ['JINGLE', 'BELL'] },
+  spiderman: { icon: '🕷', words: ['YOUR', 'FRIENDLY', 'NEIGHBORHOOD'] },
+  love: { icon: '💕', words: ['LOVELY', 'SOUL'] },
+}
+
 function App() {
   const [routes, setRoutes] = useState([
     'Route BLUE - St Norbert/Uom',
@@ -91,6 +99,34 @@ function App() {
       </header>
 
       <main>
+      {theme !== 'default' && (
+  <div className="doomsday-wordmark" aria-hidden="true">
+    <span className="doomsday-wordmark-title">
+      {sideWordmarks[theme].icon}
+    </span>
+
+    <div className="doomsday-wordmark-letters">
+      {sideWordmarks[theme].words.map((word) => (
+        <div className="side-wordmark-word" key={word}>
+          {Array.from(word, (letter, index) => (
+            <span key={index}>{letter}</span>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    {theme === 'love' && (
+      <>
+        <span className="side-wordmark-hearts side-wordmark-hearts-left">
+          ♥ ♡ ♥ ♡ ♥
+        </span>
+        <span className="side-wordmark-hearts side-wordmark-hearts-right">
+          ♡ ♥ ♡ ♥ ♡
+        </span>
+      </>
+    )}
+  </div>
+)}
         <Routes>
           <Route
             path="/"
