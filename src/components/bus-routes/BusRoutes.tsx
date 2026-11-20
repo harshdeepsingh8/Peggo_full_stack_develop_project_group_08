@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import RouteDetailsModal from './RouteDetailsModal'
+import TransitMap from '../transit-map/TransitMap'
 
 type BusRoutesProps = {
   routes: string[]
@@ -172,6 +173,8 @@ function BusRoutes({
       <p className="selected-route">
         <strong>Selected Route:</strong> {selectedRoute}
       </p>
+
+      <TransitMap selectedRoute={selectedRoute} />
 
       <form onSubmit={addRoute}>
         <label htmlFor="add-route-dropdown">Add a bus route</label>

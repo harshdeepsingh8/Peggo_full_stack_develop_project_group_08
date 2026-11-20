@@ -1,0 +1,43 @@
+.sprint-card,
+.sprint-summary {
+  margin: 1rem 0;
+  padding: 1.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #fff;
+  color: #172033;
+}
+
+.sprint-card form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sprint-card input,
+.sprint-card select {
+  padding: 0.65rem;
+  max-width: 100%;
+}
+
+.sprint-card button {
+  margin: 0.25rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.sprint-card ul {
+  padding: 0;
+  list-style: none;
+}
+
+.sprint-card li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
