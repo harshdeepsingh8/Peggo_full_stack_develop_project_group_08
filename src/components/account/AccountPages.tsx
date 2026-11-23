@@ -1,10 +1,11 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { createElement, useState, type ChangeEvent, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 const profileKey = 'peggo-profile'
 const emptyProfile = { name: '', birthDate: '', email: '', phone: '', avatar: '' }
 
 export function UserProfile() {
-  const [profile, setProfile] = useState(() => {
+  const [profile, setProfile] = useState<typeof emptyProfile>(() => {
     try {
       return { ...emptyProfile, ...JSON.parse(localStorage.getItem(profileKey) ?? '{}') }
     } catch {
@@ -111,10 +112,63 @@ export function UserProfile() {
     </section>
   )
 }
-export function Settings() {
-  return <section className="account-page"><h1>Settings</h1></section>
+type SettingsProps<T extends string> = {
+  theme: T
+  themes: readonly { id: T; label: string }[]
+  mode: 'light' | 'dark'
+  onThemeChange: (theme: T) => void
+  onModeChange: (mode: 'light' | 'dark') => void
+}
+
+export function Settings<T extends string>({
+  theme, themes, mode, onThemeChange, onModeChange,
+}: SettingsProps<T>) {
+  return (
+    <section className="account-page">
+      <h1>Settings</h1>
+
+      <h2>General</h2>
+      <label>
+        Display mode
+        <select value={mode} onChange={(event) =>
+          onModeChange(event.currentTarget.value === 'dark' ? 'dark' : 'light')
+        }>
+          <option value="light">Light mode</option>
+          <option value="dark">Dark mode</option>
+        </select>
+      </label>
+
+      <h2>Theme</h2>
+      <label>
+        Colour theme
+        <select value={theme} onChange={(event) => {
+          const selected = themes.find((option) => option.id === event.currentTarget.value)
+          if (selected) onThemeChange(selected.id)
+        }}>
+          {themes.map((option) => (
+            <option key={option.id} value={option.id}>{option.label}</option>
+          ))}
+        </select>
+      </label>
+
+            <h2>Account</h2>
+      <Link to="/bus-routes/user-profile">Edit profile and contact details</Link>
+    </section>
+  )
 }
 
 export function HelpFeedback() {
-  return <section className="account-page"><h1>Help &amp; Feedback</h1></section>
+  return createElement(
+    'section',
+    { className: 'account-page' },
+    createElement('h1', null, 'Help & Feedback'),
+    createElement('h2', null, 'Demo customer care'),
+    createElement('p', null, '204-555-0147 (example number)'),
+    createElement('h2', null, 'Winnipeg Transit'),
+    createElement(
+      'a',
+      { href: 'https://www.winnipeg.ca/services-programs/transportation-roads-parking/transit/contact-winnipeg-transit' },
+      'Contact Winnipeg Transit or send feedback',
+    ),
+  )
 }
