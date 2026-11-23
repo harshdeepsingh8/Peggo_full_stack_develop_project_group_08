@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
+import { HelpFeedback, Settings, UserProfile } from './components/account/AccountPages'
 import BusRoutes from './components/bus-routes/BusRoutes'
 import FavouriteBusRoutes from './components/favourite-bus-routes/FavouriteBusRoutes'
 import './App.css'
@@ -64,32 +65,43 @@ function App() {
         <div className="brand-row">
           <h1>PeGGo</h1>
 
-          <details className="theme-picker">
-            <summary>
-              Theme · {themes.find((option) => option.id === theme)?.label}
-            </summary>
+          <div className="header-actions">
+            <details className="theme-picker">
+              <summary>
+                Theme · {themes.find((option) => option.id === theme)?.label}
+              </summary>
 
-            <div className="theme-options" role="group" aria-label="Colour theme">
-              {themes.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  aria-pressed={theme === option.id}
-                  onClick={(event) => {
-                    const picker = event.currentTarget.closest('details')
-                    changeTheme(option.id)
+              <div className="theme-options" role="group" aria-label="Colour theme">
+                {themes.map((option) => (
+                  <button
+                    key={option.id}
+                    type="button"
+                    aria-pressed={theme === option.id}
+                    onClick={(event) => {
+                      const picker = event.currentTarget.closest('details')
+                      changeTheme(option.id)
 
-                    if (picker) {
-                      picker.open = false
-                      picker.querySelector('summary')?.focus()
-                    }
-                  }}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </details>
+                      if (picker) {
+                        picker.open = false
+                        picker.querySelector('summary')?.focus()
+                      }
+                    }}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </details>
+
+            <details className="theme-picker account-menu">
+              <summary>Account</summary>
+              <div className="theme-options account-options">
+                <Link to="/bus-routes/user-profile">User Profile</Link>
+                <Link to="/bus-routes/settings">Settings</Link>
+                <Link to="/bus-routes/help-feedback">Help &amp; Feedback</Link>
+              </div>
+            </details>
+          </div>
         </div>
 
         <nav>
@@ -99,34 +111,35 @@ function App() {
       </header>
 
       <main>
-      {theme !== 'default' && (
-  <div className="doomsday-wordmark" aria-hidden="true">
-    <span className="doomsday-wordmark-title">
-      {sideWordmarks[theme].icon}
-    </span>
+        {theme !== 'default' && (
+          <div className="doomsday-wordmark" aria-hidden="true">
+            <span className="doomsday-wordmark-title">
+              {sideWordmarks[theme].icon}
+            </span>
 
-    <div className="doomsday-wordmark-letters">
-      {sideWordmarks[theme].words.map((word) => (
-        <div className="side-wordmark-word" key={word}>
-          {Array.from(word, (letter, index) => (
-            <span key={index}>{letter}</span>
-          ))}
-        </div>
-      ))}
-    </div>
+            <div className="doomsday-wordmark-letters">
+              {sideWordmarks[theme].words.map((word) => (
+                <div className="side-wordmark-word" key={word}>
+                  {Array.from(word, (letter, index) => (
+                    <span key={index}>{letter}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
 
-    {theme === 'love' && (
-      <>
-        <span className="side-wordmark-hearts side-wordmark-hearts-left">
-          ♥ ♡ ♥ ♡ ♥
-        </span>
-        <span className="side-wordmark-hearts side-wordmark-hearts-right">
-          ♡ ♥ ♡ ♥ ♡
-        </span>
-      </>
-    )}
-  </div>
-)}
+            {theme === 'love' && (
+              <>
+                <span className="side-wordmark-hearts side-wordmark-hearts-left">
+                  ♥ ♡ ♥ ♡ ♥
+                </span>
+                <span className="side-wordmark-hearts side-wordmark-hearts-right">
+                  ♡ ♥ ♡ ♥ ♡
+                </span>
+              </>
+            )}
+          </div>
+        )}
+
         <Routes>
           <Route
             path="/"
@@ -162,6 +175,10 @@ function App() {
               />
             }
           />
+
+          <Route path="/bus-routes/user-profile" element={<UserProfile />} />
+          <Route path="/bus-routes/settings" element={<Settings />} />
+          <Route path="/bus-routes/help-feedback" element={<HelpFeedback />} />
         </Routes>
       </main>
 
