@@ -1,32 +1,23 @@
-# React + TypeScript + Vite
+# PeGGo
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Project Team
 
-Currently, two official plugins are available:
+### Team Name
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Group 08
 
-## React Compiler
+### Team Members
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Lovedeep Singh
+- Jojanpreet Kaur
+- Harshdeep Singh
 
-## Expanding the Oxlint configuration
+## Project Description
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+PeGGo is a Winnipeg transit tracking application that helps users access useful transit information.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## User Stories
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- As a user, I want to view nearby bus stops so that I can find a convenient place to catch a bus.
+- As a user, I want to view bus routes so that I can see route information.
+- As a user, I want to save favourite routes or trips so that I can easily access them again.
