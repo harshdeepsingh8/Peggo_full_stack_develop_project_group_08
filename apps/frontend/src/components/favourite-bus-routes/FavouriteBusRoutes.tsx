@@ -34,14 +34,14 @@ function FavouriteBusRoutes({
     addFavourite,
   } = useFavouriteRoutes()
 
-  function handleAddFavourite(event: FormEvent<HTMLFormElement>) {
+  async function handleAddFavourite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (newRoute === '') {
       return
     }
 
-    addFavourite(newRoute)
+    await addFavourite(newRoute)
     setNewRoute('')
   }
 
