@@ -59,8 +59,17 @@ function App() {
     localStorage.setItem('peggo-theme', nextTheme)
   }
 
+ const [mode, setMode] = useState<'light' | 'dark'>(() =>
+  localStorage.getItem('peggo-display-mode') === 'dark' ? 'dark' : 'light',
+)
+
+function changeMode(nextMode: 'light' | 'dark') {
+  setMode(nextMode)
+  localStorage.setItem('peggo-display-mode', nextMode)
+}
+
   return (
-    <div className="app-shell" data-theme={theme}>
+    <div className="app-shell" data-theme={theme} data-mode={mode}>
       <header>
         <div className="brand-row">
           <h1>PeGGo</h1>
@@ -177,7 +186,18 @@ function App() {
           />
 
           <Route path="/bus-routes/user-profile" element={<UserProfile />} />
-          <Route path="/bus-routes/settings" element={<Settings />} />
+          <Route
+  path="/bus-routes/settings"
+  element={
+    <Settings
+      theme={theme}
+      themes={themes}
+      mode={mode}
+      onThemeChange={changeTheme}
+      onModeChange={changeMode}
+    />
+  }
+/>
           <Route path="/bus-routes/help-feedback" element={<HelpFeedback />} />
         </Routes>
       </main>
@@ -188,5 +208,6 @@ function App() {
     </div>
   )
 }
+
 
 export default App
