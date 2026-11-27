@@ -943,3 +943,54 @@ header.halloween-header nav {
   right: 12%;
   transform: rotate(5deg);
 }
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.account-options a {
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #172b46;
+  text-decoration: none;
+}
+
+.account-options a:hover,
+.account-options a:focus-visible {
+  background: #eef4fb;
+}
+
+.account-page {
+  padding: clamp(20px, 4vw, 36px);
+  border: 1px solid var(--dash-border, #dce5ef);
+  border-radius: 24px;
+  background: var(--dash-surface, white);
+  color: var(--dash-text, #172b46);
+}
+
+.account-page label {
+  display: grid;
+  gap: 6px;
+  max-width: 420px;
+  margin-bottom: 14px;
+}
+
+.account-page :is(input, select) {
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--dash-border, #aabbd0);
+  border-radius: 8px;
+  background: var(--dash-surface, white);
+  color: inherit;
+}
+
+.profile-avatar {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
