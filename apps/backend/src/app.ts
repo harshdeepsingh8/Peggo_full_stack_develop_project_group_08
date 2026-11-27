@@ -1,10 +1,13 @@
-import express from 'express'
-import favouriteRoutes from './routes/favouriteRoutes'
+import express from 'express';
+import cors from 'cors';
+import { corsOptions } from './config/cors';
+import favouriteRoutes from './routes/favouriteRoutes';
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(cors(corsOptions));
+app.use(express.json());
 
-app.use('/api/favourite-routes', favouriteRoutes)
+app.use('/api/favourite-routes', favouriteRoutes);
 
-export default app
+export default app;

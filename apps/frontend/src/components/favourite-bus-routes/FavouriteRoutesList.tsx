@@ -1,6 +1,4 @@
-
 import { useFavouriteRoutes } from '../../hooks/useFavouriteRoutes'
-import { favouriteRouteService } from '../../services/favouriteRouteService'
 
 type FavouriteRoutesListProps = {
   onSelect: (routeName: string) => void
@@ -26,11 +24,7 @@ function FavouriteRoutesList({
       <h2>Saved Routes</h2>
 
       <ul>
-        {favouriteRoutes
-          .filter((route) =>
-            favouriteRouteService.isFavourite(route.routeName)
-          )
-          .map((route) => (
+        {favouriteRoutes.map((route) => (
             <li key={route.id}>
               <button
                 type="button"
@@ -49,8 +43,8 @@ function FavouriteRoutesList({
 
               <button
                 type="button"
-                onClick={() => {
-                  removeFavourite(route.id)
+                onClick={async () => {
+                  await removeFavourite(route.id)
                   onRemove(route.routeName)
                 }}
               >
